@@ -4,6 +4,7 @@
 #include "database.h"
 #include "login_interface.h"
 #include "relationship.h"
+#include "message.h"
 
 using namespace std;
 
@@ -58,4 +59,12 @@ int main(){
     sql = "SELECT * FROM BLOCKED;";
     rc = sqlite3_exec(db, sql.c_str(), print_select, 0, NULL);
     cout << endl;
+
+    record_message("Jensen", 3, "Hello");
+    record_message("Anton", 1, "HAHAHA");
+    record_message("Lala", 3, "How r u?");
+    record_message("Anton", 3, "Finee");
+    record_message("Kim", 1, "LOL");
+    message_history(3);
+    message_history(1);
 }

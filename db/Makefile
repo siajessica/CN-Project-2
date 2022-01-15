@@ -1,7 +1,7 @@
 CPP := g++
 CFLAG := -lsqlite3 -Wall
 
-INPUT_MAIN := main.cpp database.cpp login_interface.cpp relationship.cpp
+INPUT_MAIN := main.cpp database.cpp login_interface.cpp relationship.cpp message.cpp
 OUTPUT_MAIN := main
 OUTPUT_DATABASE := chatroom.db
 
