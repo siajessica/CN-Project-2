@@ -24,9 +24,9 @@ sqlite3* createDB(){
     else cout << "users table created." << endl;
 
     sql = "CREATE TABLE IF NOT EXISTS FRIENDS("
-            "USER1      TEXT        	NOT NULL,"
-            "USER2      TEXT        	NOT NULL,"
-            "CHAT_ID    INTEGER		PRIMARY KEY	AUTOINCREMENT);";
+            "USER1      TEXT        NOT NULL,"
+            "USER2      TEXT        NOT NULL,"
+            "CHAT_ID    INTEGER);";
     rc = sqlite3_exec(db, sql.c_str(), NULL, 0, NULL);
     if(rc != SQLITE_OK) cerr << "cannot create friend table" << endl;
     else cout << "friends table created." << endl;

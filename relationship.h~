@@ -12,5 +12,6 @@ int add_friend(string user1, string user2);
 int add_block(string user1, string user2);
 int remove_friend(string user1, string user2);
 int unblock(string user1, string user2);
+int get_cid(void *p, int argc, char **argv, char **colName);
 
 #endif

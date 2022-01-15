@@ -30,7 +30,7 @@ int main(){
     list_friends("Jensen");
 
 
-    add_block("Antonio", "Jensen");
+    /*add_block("Antonio", "Jensen");
     add_block("Lala", "Jensen");
     add_block("Antonio", "Jensen");
     add_block("Antonio", "Lulu");
@@ -57,5 +57,5 @@ int main(){
     cout << "BLOCK TABLE" << endl;
     sql = "SELECT * FROM BLOCKED;";
     rc = sqlite3_exec(db, sql.c_str(), print_select, 0, NULL);
-    cout << endl;
+    cout << endl;*/
 }

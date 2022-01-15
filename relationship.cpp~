@@ -73,6 +73,14 @@ int remove_friend(string user1, string user2){
     return 0;
 }
 
+//callback function for chat_id
+int get_cid(void *p, int argc, char **argv, char ** colName){
+	char *flag = (char*)p;
+	cout << "PRINTING CHAT IF FROM THE TOP" << argv[0] << endl;
+	flag = *(char**)argv[0];
+	return 0;
+}
+
 //add friend
 int add_friend(string user1, string user2){
     sqlite3 *db;
@@ -119,13 +127,33 @@ int add_friend(string user1, string user2){
 	    return 1;
     }
 
-    sql = "INSERT INTO FRIENDS (USER1, USER2) VALUES('"
-                        + user1 + "', '" + user2 + "');";
+    sql = "INSERT INTO FRIENDS (USER1, USER2, CHAT_ID) VALUES('"
+                        + user1 + "', '" + user2 + "', -1);";
     rc = sqlite3_exec(db, sql.c_str(), NULL, 0, NULL);
     if(rc != SQLITE_OK){
         cerr << "insert friend error." << endl;
         return 0;
-    } else cout << "Friend Added." << endl;
+    }
+
+    char *errMsg;
+    sql = "INSERT INTO CHATS (CHAT_ID, NAME, MEMBERS, NUM_MEMBER) VALUES( , 'PM','"
+	    + user1 + ", " + user2 + "', 2);";
+    rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &errMsg);
+    if(rc != SQLITE_OK) cout << "error insert chat because " << errMsg << endl;
+
+    string c_id = "-1";
+    sql = "SELECT CHAT_ID FROM CHATS WHERE MEMBERS = '" + user1 + ", " + user2 + "';";
+    rc = sqlite3_exec(db, sql.c_str(), get_cid, &c_id, NULL);
+    if(rc != SQLITE_OK) cout << "select chat error" << endl;
+    cout << c_id << endl;
+    if(stoi(c_id) != -1){
+	    sql = "UPDATE FRIENDS SET CHAT_ID = " + c_id + " WHERE MEMBERS = '" + user1 + ", " + user2 + "';";
+	    rc = sqlite3_exec(db, sql.c_str(), NULL, 0, NULL);
+	    if(rc != SQLITE_OK){
+		    cout << "failed to update chat_id" << endl;
+		    return 0;
+	    }
+    } else cout << "failed to get chat_id" << endl;
     
     return 1;
 }
