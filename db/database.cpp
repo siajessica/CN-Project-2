@@ -39,20 +39,20 @@ sqlite3* createDB(){
     if(rc != SQLITE_OK) cerr << "cannot create block table" << endl;
     else cout << "blocked table created." << endl;
 
-    sql = "CREATE TABLE IF NOT EXISTS CHATS("
+    /*sql = "CREATE TABLE IF NOT EXISTS CHATS("
             "CHAT_ID        INTEGER     PRIMARY KEY	AUTOINCREMENT,"
             "NAME  	    TEXT     	NOT NULL,"
             "MEMBERS        TEXT        NOT NULL,"
             "NUM_MEMBER     INTEGER     NOT NULL);";
     rc = sqlite3_exec(db, sql.c_str(), NULL, 0, NULL);
     if(rc != SQLITE_OK) cerr << "cannot create chats table" << endl;
-    else cout << "chats table created." << endl;
+    else cout << "chats table created." << endl;*/
 
     sql = "CREATE TABLE IF NOT EXISTS MESSAGE("
-            "SENDER     TEXT        NOT NULL,"
-            "CHAT_ID    INTEGER     NOT NULL,"
-            "BODY       TEXT        NOT NULL,"
-            "TIME       TEXT        NOT NULL);";
+            "SENDER     TEXT            NOT NULL,"
+            "CHAT_ID    INTEGER         NOT NULL,"
+            "BODY       TEXT            NOT NULL,"
+            "TIME       TIMESTAMP       DEFAULT         CURRENT_TIMESTAMP       NOT NULL);";
     rc = sqlite3_exec(db, sql.c_str(), NULL, 0, NULL);
     if(rc != SQLITE_OK) cerr << "cannot create message table" << endl;
     else cout << "message table created." << endl;
