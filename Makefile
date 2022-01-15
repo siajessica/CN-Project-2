@@ -1,8 +1,17 @@
-all:
-	g++ server.cpp -lpthread -lsqlite3 -Wall -o server
-	g++ client.cpp -lpthread -lsqlite3 -Wall -o client
+CPP := g++
+CFLAG := -lsqlite3 -Wall
+
+INPUT_MAIN := main.cpp database.cpp login_interface.cpp relationship.cpp
+OUTPUT_SERVER := main
+OUTPUT_DATABASE := chatroom.db
+
+.PHONY: all clean main
+
+all: clean main
 
 clean:
-	rm -f server
-	rm -f client
-	rm -f chatroom.db
+	rm -f $(OUTPUT_MAIN)
+	rm -f $(OUTPUT_DATABASE)
+
+main: main.cpp
+	$(CPP) $(CFLAG) $(INPUT_MAIN) -o $(OUTPUT_MAIN)
